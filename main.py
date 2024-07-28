@@ -1,21 +1,23 @@
 import calendar
+import datetime
+import json
 
-calendar.setfirstweekday(calendar.SUNDAY)
+today = datetime.date.today()
 
-y = 200
+cal = calendar.Calendar(firstweekday=0)  # creazione del calendario personalizzato e setta la monday come primo giorno della settimana
 
-m = 1
-
-cal = calendar.month(y, m)
-
-print(cal)
-
-
-cal.weekday(200, 2, 1)
+# Ottenere i giorni del mese corrente come lista di settimane
+this_month = cal.monthdayscalendar(today.year, today.month)
 
 
+calendar_data = {
+    "year": today.year,
+    "month": today.month,
+    "weeks": this_month
+}
 
-#loCAL
-# last test
+# Salvare il calendario in un file JSON
+with open('calendar.json', 'w') as json_file:
+    json.dump(calendar_data, json_file, indent=4)
 
-#no joke
+print("Calendario salvato in 'calendar.json'")
