@@ -1,4 +1,3 @@
-c = {'color': 'blue', 'shape': 'square', 'volume':40}
+import calendar
 
-for i in range(11):
-    c.append()
+calendar.setfirstweekday(calendar.SUNDAY)
