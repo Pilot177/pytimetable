@@ -1,15 +1,23 @@
-from fileoperation import savecalendar, loadcalendar
-from dateoperation import todaydate
-from eventoperation import reset
+import calendar
+import datetime
+import json
 
-leave = False
+today = datetime.date.today()
 
-while not leave:
-    k = str(input())
-    
-    if k == 'u':
-        leave = True
-    elif k == 'r':
-        reset()
-    else:
-        print("Comando non valido")
+cal = calendar.Calendar(firstweekday=0)  # creazione del calendario personalizzato e setta la monday come primo giorno della settimana
+
+# Ottenere i giorni del mese corrente come lista di settimane
+this_month = cal.monthdayscalendar(today.year, today.month)
+
+
+calendar_data = {
+    "year": today.year,
+    "month": today.month,
+    "weeks": this_month
+}
+
+# Salvare il calendario in un file JSON
+with open('calendar.json', 'w') as json_file:
+    json.dump(calendar_data, json_file, indent=4)
+
+print("Calendario salvato in 'calendar.json'")
